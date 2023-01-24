@@ -57,6 +57,7 @@ jobs:
           tar
           --directory "./out/"
           -cvf "tech_and_magic_wasm.tar"
+          .
 
       - name: Upload github pages
         uses: actions/upload-artifact@main
