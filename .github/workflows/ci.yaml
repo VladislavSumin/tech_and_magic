@@ -23,11 +23,15 @@ jobs:
           build-essential
           libpulse-dev
           libdbus-1-dev
+          libudev
 
       - name: Setup rust toolchain
         uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
+
+      - name: Setup rust cache
+        uses: Swatinem/rust-cache@v2
 
       - name: Build project
         uses: actions-rs/cargo@v1
