@@ -51,3 +51,15 @@ jobs:
 
       - name: Run wasm-bindgen
         run: wasm-bindgen --out-dir ./out/ --target web ./target/wasm32-unknown-unknown/release/tech_and_magic.wasm
+
+      - name: Archive site for github pages
+        run: >-
+          tar
+          --directory "./out/"
+          -cvf "tech_and_magic_wasm.tar"
+
+      - name: Upload github pages
+        uses: actions/upload-artifact@main
+        with:
+          name: tech_and_magic_wasm
+          path: ./tech_and_magic_wasm.tar
