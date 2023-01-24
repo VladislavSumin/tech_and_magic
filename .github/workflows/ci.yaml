@@ -29,6 +29,7 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
+          target: wasm32-unknown-unknown
 
       - name: Setup rust cache
         uses: Swatinem/rust-cache@v2
@@ -39,8 +40,11 @@ jobs:
           command: build
           args: --release
 
-      - name: Build project WASM
+      - name: Build project wasm
         uses: actions-rs/cargo@v1
         with:
           command: build
           args: --release --target wasm32-unknown-unknown
+
+      - name: Run wasm-bindgen
+        run: wasm-bindgen --out-dir ./out/ --target web ./target/wasm32-unknown-unknown/release/tech_and_magic.wasm
