@@ -34,6 +34,9 @@ jobs:
       - name: Setup rust cache
         uses: Swatinem/rust-cache@v2
 
+      - name: Install rust wasm-bindgen
+        run: cargo install -f wasm-bindgen-cli
+
       - name: Build project
         uses: actions-rs/cargo@v1
         with:
