@@ -23,7 +23,7 @@ jobs:
           build-essential
           libpulse-dev
           libdbus-1-dev
-          libudev
+          libudev-dev
 
       - name: Setup rust toolchain
         uses: actions-rs/toolchain@v1
