@@ -15,10 +15,20 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v3
 
+      - name: Install dependencies
+        run: >-
+          sudo apt-get install -y
+          libasound2-dev
+          portaudio19-dev
+          build-essential
+          libpulse-dev
+          libdbus-1-dev
+
       - name: Setup rust toolchain
         uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
+
       - name: Build project
         uses: actions-rs/cargo@v1
         with:
