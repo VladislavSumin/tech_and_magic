@@ -7,8 +7,8 @@ on:
 
 
 jobs:
-  ci:
-    name: ci
+  build:
+    name: build
     runs-on: ubuntu-22.04
     timeout-minutes: 30
     steps:
@@ -62,5 +62,25 @@ jobs:
       - name: Upload github pages
         uses: actions/upload-artifact@main
         with:
-          name: tech_and_magic_wasm
+          name: github-pages
           path: ./tech_and_magic_wasm.tar
+
+
+  deploy:
+    #See: https://github.com/actions/deploy-pages
+    name: deploy
+    needs: build
+    runs-on: ubuntu-22.04
+
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
