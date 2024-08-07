@@ -1,5 +1,6 @@
 mod render_fps_plugin;
 
+use bevy::diagnostic::FrameTimeDiagnosticsPlugin;
 use bevy::math::vec3;
 use bevy::prelude::*;
 use crate::render_fps_plugin::RenderFpsPlugin;
@@ -7,6 +8,7 @@ use crate::render_fps_plugin::RenderFpsPlugin;
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
+        .add_plugins(FrameTimeDiagnosticsPlugin)
         .add_plugins(RenderFpsPlugin)
         .add_systems(Startup, setup_player_camera)
         .run();

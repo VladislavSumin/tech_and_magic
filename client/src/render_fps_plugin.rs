@@ -1,6 +1,5 @@
 use bevy::diagnostic::{DiagnosticsStore, FrameTimeDiagnosticsPlugin};
 use bevy::prelude::*;
-use bevy_mod_sysfail::sysfail;
 
 /// Плагин для отображения FPS в правом верхнем углу.
 /// Для работы требует подключенный плагин [FrameTimeDiagnosticsPlugin].
@@ -32,13 +31,13 @@ fn setup_fps_text_texture(
     ));
 }
 
-#[sysfail]
 fn update_fps(
     diagnostics: Res<DiagnosticsStore>,
     mut fps_query: Query<&mut Text, With<FpsCounter>>,
 ) {
     let mut text = fps_query.single_mut();
-    let fps = diagnostics.get(&FrameTimeDiagnosticsPlugin::FPS)?
+    let fps = diagnostics.get(&FrameTimeDiagnosticsPlugin::FPS)
+        .unwrap()
         .smoothed()
         .unwrap_or(0f64);
     text.sections[0].value = format!("FPS: {:.0}", fps);
