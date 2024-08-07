@@ -1,32 +1,26 @@
 mod render_fps_plugin;
+mod loading_plugin;
+mod camera_plugin;
 
 use bevy::diagnostic::FrameTimeDiagnosticsPlugin;
-use bevy::math::vec3;
 use bevy::prelude::*;
+use crate::camera_plugin::CameraPlugin;
+use crate::loading_plugin::LoadingPlugin;
 use crate::render_fps_plugin::RenderFpsPlugin;
 
 fn main() {
     App::new()
+        // Bevy plugins
         .add_plugins(DefaultPlugins)
         .add_plugins(FrameTimeDiagnosticsPlugin)
-        .add_plugins(RenderFpsPlugin)
-        .add_systems(Startup, setup_player_camera)
+
+        // Project plugins
+        .add_plugins((
+            RenderFpsPlugin,
+            LoadingPlugin,
+            CameraPlugin,
+        ))
+
         .run();
 }
 
-/// Маркер для дефолтной камеры игрока
-#[derive(Component)]
-pub struct PlayerCamera;
-
-/// Создает и настраивает дефолтную камеру игрока
-fn setup_player_camera(mut commands: Commands) {
-    // camera
-    commands.spawn((
-        Camera3dBundle {
-            transform: Transform::from_xyz(0., 0., 128.0)
-                .looking_at(vec3(14., 14., 0.), Vec3::Z),
-            ..default()
-        },
-        PlayerCamera,
-    ));
-}
