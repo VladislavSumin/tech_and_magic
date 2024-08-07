@@ -1,6 +1,18 @@
-[package]
-name = "tech_and_magic"
-version = "0.1.0"
-edition = "2021"
+[workspace]
+resolver = "2"
+members = [
+    "client",
+    "server",
+]
 
-[dependencies]
+[workspace.dependencies]
+# Основной framework игрового движка.
+bevy = { version = "0.14" }
+
+# TODO включить оптимизации после возникновения проблем с производительностью
+[profile.dev]
+opt-level = 0
+
+# TODO включить оптимизации после возникновения проблем с производительностью
+[profile.dev.package."*"]
+opt-level = 0
