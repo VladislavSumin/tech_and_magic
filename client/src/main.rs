@@ -1,11 +1,15 @@
 mod render_fps_plugin;
 mod loading_plugin;
 mod camera_plugin;
+mod main_menu_plugin;
+mod game_state;
 
 use bevy::diagnostic::FrameTimeDiagnosticsPlugin;
 use bevy::prelude::*;
 use crate::camera_plugin::CameraPlugin;
+use crate::game_state::GameStatePlugin;
 use crate::loading_plugin::LoadingPlugin;
+use crate::main_menu_plugin::MainMenuPlugin;
 use crate::render_fps_plugin::RenderFpsPlugin;
 
 fn main() {
@@ -18,6 +22,8 @@ fn main() {
         .add_plugins((
             RenderFpsPlugin,
             LoadingPlugin,
+            GameStatePlugin,
+            MainMenuPlugin,
             CameraPlugin,
         ))
 

@@ -8,9 +8,9 @@ impl Plugin for LoadingPlugin {
     fn build(&self, app: &mut App) {
         app
             .init_state::<LoadingState>()
-            .add_systems(OnEnter(LoadingState::Loading), spawn_loading_text)
-            .add_systems(Update, update_loading_text.run_if(in_state(LoadingState::Loading)))
-            .add_systems(OnExit(LoadingState::Loading), despawn_loading_text)
+            .add_systems(OnEnter(LoadingState::Loading), spawn)
+            .add_systems(Update, update.run_if(in_state(LoadingState::Loading)))
+            .add_systems(OnExit(LoadingState::Loading), despawn)
         ;
     }
 }
@@ -22,10 +22,9 @@ pub enum LoadingState {
     Loaded,
 }
 
-
 #[derive(Component)]
 struct LoadingText;
-fn spawn_loading_text(
+fn spawn(
     mut commands: Commands,
 ) {
     commands.spawn((
@@ -39,7 +38,7 @@ fn spawn_loading_text(
     ));
 }
 
-fn update_loading_text(
+fn update(
     mut progress: Local<f32>,
     mut text_query: Query<&mut Text, With<LoadingText>>,
     mut next_loading_state: ResMut<NextState<LoadingState>>,
@@ -54,7 +53,7 @@ fn update_loading_text(
     text.sections[0].value = format!("Loading...: {:.1}%", *progress);
 }
 
-fn despawn_loading_text(
+fn despawn(
     mut commands: Commands,
     text_query: Query<Entity, With<LoadingText>>,
 ) {
