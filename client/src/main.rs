@@ -3,6 +3,7 @@ mod loading_plugin;
 mod camera_plugin;
 mod main_menu_plugin;
 mod game_state;
+mod network_plugin;
 
 use bevy::diagnostic::FrameTimeDiagnosticsPlugin;
 use bevy::prelude::*;
@@ -11,6 +12,7 @@ use crate::camera_plugin::CameraPlugin;
 use crate::game_state::GameStatePlugin;
 use crate::loading_plugin::LoadingPlugin;
 use crate::main_menu_plugin::MainMenuPlugin;
+use crate::network_plugin::NetworkPlugin;
 use crate::render_fps_plugin::RenderFpsPlugin;
 
 fn main() {
@@ -26,6 +28,7 @@ fn main() {
         .add_plugins((
             RenderFpsPlugin,
             LoadingPlugin,
+            NetworkPlugin,
             GameStatePlugin,
             MainMenuPlugin,
             CameraPlugin,

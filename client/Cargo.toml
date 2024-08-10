@@ -6,4 +6,5 @@ edition = "2021"
 [dependencies]
 bevy = { workspace = true }
 bevy_egui = { workspace = true }
+bevy_renet = { workspace = true }
 egui = { workspace = true }
