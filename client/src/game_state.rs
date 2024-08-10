@@ -17,4 +17,6 @@ impl Plugin for GameStatePlugin {
 pub enum GameState {
     #[default]
     MainMenu,
+    ConnectingToServer,
+    ConnectionError,
 }

@@ -29,7 +29,7 @@ fn render(
     host.push_str("localhost");
 
     egui::Window::new("Main menu.")
-        .pivot(Align2::LEFT_TOP)
+        .pivot(Align2::CENTER_CENTER)
         .show(contexts.ctx_mut(), |ui| {
             ui.label("Host");
             ui.text_edit_singleline(&mut host);
@@ -42,8 +42,10 @@ fn render(
 fn connect(
     mut commands: Commands,
     mut ev_connect: EventReader<ConnectEvent>,
+    mut game_state: ResMut<NextState<GameState>>,
 ) {
-    for ev in ev_connect.read() {
+    for _ in ev_connect.read() {
+        info!("Start connecting to server");
         let authentication = ClientAuthentication::Unsecure {
             server_addr: "127.0.0.1:5000".parse().unwrap(),
             client_id: 0,
@@ -55,5 +57,6 @@ fn connect(
         let transport = NetcodeClientTransport::new(current_time, authentication, socket).unwrap();
 
         commands.insert_resource(transport);
+        game_state.set(GameState::ConnectingToServer);
     }
 }
