@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 core_log = { path = "../core/log" }
+feature_network_client = { path = "../feature/network/client" }
 
 bevy = { workspace = true }
 bevy_egui = { workspace = true }

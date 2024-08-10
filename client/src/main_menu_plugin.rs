@@ -4,6 +4,7 @@ use bevy::prelude::*;
 use bevy_egui::EguiContexts;
 use bevy_renet::renet::transport::{ClientAuthentication, NetcodeClientTransport};
 use egui::Align2;
+use feature_network_client::ConnectEvent;
 use crate::game_state::GameState;
 
 /// Плагин отвечающий за работу главного игрового меню.
@@ -12,14 +13,11 @@ pub struct MainMenuPlugin;
 impl Plugin for MainMenuPlugin {
     fn build(&self, app: &mut App) {
         app
-            .add_event::<ConnectEvent>()
-            .add_systems(Update, (render, connect).run_if(in_state(GameState::MainMenu)))
+            .add_systems(Update, render.run_if(in_state(GameState::MainMenu)))
         ;
     }
 }
 
-#[derive(Event)]
-struct ConnectEvent;
 
 fn render(
     mut contexts: EguiContexts,
@@ -34,29 +32,10 @@ fn render(
             ui.label("Host");
             ui.text_edit_singleline(&mut host);
             if ui.button("Connect").clicked() {
-                ev_connect.send(ConnectEvent);
+                ev_connect.send(ConnectEvent {
+                    host: "127.0.0.1".into(),
+                    port: 5000,
+                });
             }
         });
-}
-
-fn connect(
-    mut commands: Commands,
-    mut ev_connect: EventReader<ConnectEvent>,
-    mut game_state: ResMut<NextState<GameState>>,
-) {
-    for _ in ev_connect.read() {
-        info!("Start connecting to server");
-        let authentication = ClientAuthentication::Unsecure {
-            server_addr: "127.0.0.1:5000".parse().unwrap(),
-            client_id: 0,
-            user_data: None,
-            protocol_id: 0,
-        };
-        let socket = UdpSocket::bind("127.0.0.1:0").unwrap();
-        let current_time = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap();
-        let transport = NetcodeClientTransport::new(current_time, authentication, socket).unwrap();
-
-        commands.insert_resource(transport);
-        game_state.set(GameState::ConnectingToServer);
-    }
 }
