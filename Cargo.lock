@@ -1596,6 +1596,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "core_log"
+version = "0.1.0"
+dependencies = [
+ "bevy",
+]
+
+[[package]]
 name = "coreaudio-rs"
 version = "0.11.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3572,6 +3579,7 @@ version = "0.1.0"
 dependencies = [
  "bevy",
  "bevy_renet",
+ "core_log",
 ]
 
 [[package]]
