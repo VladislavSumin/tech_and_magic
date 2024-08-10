@@ -2,7 +2,7 @@ use std::net::UdpSocket;
 use std::time::SystemTime;
 use bevy::prelude::*;
 use bevy_renet::renet::{ConnectionConfig, RenetClient};
-use bevy_renet::renet::transport::{ClientAuthentication, NetcodeClientTransport};
+use bevy_renet::renet::transport::{ClientAuthentication, NetcodeClientTransport, NetcodeTransportError};
 use bevy_renet::RenetClientPlugin;
 use bevy_renet::transport::NetcodeClientPlugin;
 
@@ -25,7 +25,8 @@ impl Plugin for ClientNetworkPlugin {
                 NetcodeClientPlugin,
             ))
             .add_event::<ConnectEvent>()
-            .add_systems(Update, handle_connect_event) // TODO подумать, нужно ли тут смотреть на конкретные состояния.
+            // TODO подумать, нужно ли тут смотреть на конкретные состояния.
+            .add_systems(Update, (handle_connect_event, handle_transport_error))
         ;
     }
 }
@@ -54,5 +55,17 @@ fn handle_connect_event(
         let transport = NetcodeClientTransport::new(current_time, authentication, socket).unwrap();
 
         commands.insert_resource(transport);
+    }
+}
+
+/// Слушает события [NetcodeTransportError] и в случае ошибки удаляет сетевой слой.
+fn handle_transport_error(
+    mut transport_error_events: EventReader<NetcodeTransportError>,
+    mut commands: Commands,
+) {
+    for error in transport_error_events.read() {
+        warn!("Transport error: {}", error);
+        commands.remove_resource::<NetcodeClientTransport>();
+        commands.remove_resource::<RenetClient>();
     }
 }

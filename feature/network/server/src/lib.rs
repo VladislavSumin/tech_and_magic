@@ -1,7 +1,7 @@
 use std::net::UdpSocket;
 use std::time::SystemTime;
 use bevy::prelude::*;
-use bevy_renet::renet::ServerEvent;
+use bevy_renet::renet::{ConnectionConfig, RenetServer, ServerEvent};
 use bevy_renet::renet::transport::{NetcodeServerTransport, ServerAuthentication, ServerConfig};
 use bevy_renet::RenetServerPlugin;
 use bevy_renet::transport::NetcodeServerPlugin;
@@ -14,6 +14,9 @@ const LOCALHOST: &str = "127.0.0.1";
 
 impl Plugin for ServerNetworkPlugin {
     fn build(&self, app: &mut App) {
+        let server = RenetServer::new(ConnectionConfig::default());
+        app.insert_resource(server);
+        
         let server_addr = format!("{LOCALHOST}:{DEFAULT_PORT}").parse().unwrap();
         let socket = UdpSocket::bind(server_addr).unwrap();
         let server_config = ServerConfig {

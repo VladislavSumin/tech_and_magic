@@ -24,6 +24,7 @@ fn make_log_filter() -> String {
         "wgpu_core=info",
         "wgpu_hal=info",
         "winit=info",
+        "renetcode=debug",
     ]
         .join(",")
 }
