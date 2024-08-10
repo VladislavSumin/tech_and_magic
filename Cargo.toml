@@ -2,6 +2,8 @@
 resolver = "2"
 members = [
     "core/log",
+    "feature/network/server",
+    "feature/network/shared",
     "client",
     "server",
 ]

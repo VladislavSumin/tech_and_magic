@@ -5,12 +5,16 @@ use bevy_renet::renet::ServerEvent;
 use bevy_renet::renet::transport::{NetcodeServerTransport, ServerAuthentication, ServerConfig};
 use bevy_renet::RenetServerPlugin;
 use bevy_renet::transport::NetcodeServerPlugin;
+use feature_network_shared::DEFAULT_PORT;
 
-pub struct NetworkPlugin;
+/// Отвечает за базовую настройку сети на сервере.
+pub struct ServerNetworkPlugin;
 
-impl Plugin for NetworkPlugin {
+const LOCALHOST: &str = "127.0.0.1";
+
+impl Plugin for ServerNetworkPlugin {
     fn build(&self, app: &mut App) {
-        let server_addr = "127.0.0.1:5000".parse().unwrap();
+        let server_addr = format!("{LOCALHOST}:{DEFAULT_PORT}").parse().unwrap();
         let socket = UdpSocket::bind(server_addr).unwrap();
         let server_config = ServerConfig {
             current_time: SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap(),
@@ -27,19 +31,20 @@ impl Plugin for NetworkPlugin {
                 NetcodeServerPlugin,
             ))
             .insert_resource(transport)
-            .add_systems(Update, handle_events_system)
+            .add_systems(Update, handle_events)
         ;
     }
 }
 
-fn handle_events_system(mut server_events: EventReader<ServerEvent>) {
+/// Обрабатывает события подключения / отключения клиентов.
+fn handle_events(mut server_events: EventReader<ServerEvent>) {
     for event in server_events.read() {
         match event {
             ServerEvent::ClientConnected { client_id } => {
-                println!("Client {client_id} connected");
+                info!("Client {client_id} connected");
             }
             ServerEvent::ClientDisconnected { client_id, reason } => {
-                println!("Client {client_id} disconnected: {reason}");
+                info!("Client {client_id} disconnected: {reason}");
             }
         }
     }

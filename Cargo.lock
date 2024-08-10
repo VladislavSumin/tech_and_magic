@@ -1923,6 +1923,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "feature_network_server"
+version = "0.1.0"
+dependencies = [
+ "bevy",
+ "bevy_renet",
+ "feature_network_shared",
+]
+
+[[package]]
+name = "feature_network_shared"
+version = "0.1.0"
+
+[[package]]
 name = "fixedbitset"
 version = "0.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3581,6 +3594,7 @@ dependencies = [
  "bevy",
  "bevy_renet",
  "core_log",
+ "feature_network_server",
 ]
 
 [[package]]
