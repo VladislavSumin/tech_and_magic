@@ -1430,6 +1430,7 @@ dependencies = [
  "bevy",
  "bevy_egui",
  "bevy_renet",
+ "core_log",
  "egui",
 ]
 

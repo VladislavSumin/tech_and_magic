@@ -14,11 +14,12 @@ pub fn create_log_plugin() -> LogPlugin {
 fn make_log_filter() -> String {
     [
         "trace",
-        "naga=info",
         "bevy_core=info",
         "bevy_app=info",
         "bevy_render=info",
         "bevy_winit=info",
+        "bevy_time=info",
+        "naga=info",
         "gilrs=info",
         "wgpu_core=info",
         "wgpu_hal=info",
