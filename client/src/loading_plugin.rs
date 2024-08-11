@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use feature_loading_state::LoadingState;
 
 /// Выводит фейковый прогресс загрузки в состоянии [LoadingState::Loading], через
 /// какое-то время переводит в состояние [LoadingState::Loaded] и убирает текст.
@@ -13,13 +14,6 @@ impl Plugin for LoadingPlugin {
             .add_systems(OnExit(LoadingState::Loading), despawn)
         ;
     }
-}
-
-#[derive(States, Hash, PartialEq, Eq, Default, Clone, Debug)]
-pub enum LoadingState {
-    #[default]
-    Loading,
-    Loaded,
 }
 
 #[derive(Component)]

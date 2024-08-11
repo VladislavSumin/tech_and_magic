@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use crate::loading_plugin::LoadingState;
+use feature_loading_state::LoadingState;
 
 /// Плагин отвечающий за основное состояние игры.
 pub struct GameStatePlugin;
