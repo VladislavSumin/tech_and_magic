@@ -6,6 +6,7 @@ mod game_state;
 mod connecting_plugin;
 mod connection_error_plugin;
 mod connected_plugin;
+mod test_cube_plugin;
 
 use bevy::diagnostic::FrameTimeDiagnosticsPlugin;
 use bevy::prelude::*;
@@ -20,6 +21,7 @@ use crate::game_state::GameStatePlugin;
 use crate::loading_plugin::LoadingPlugin;
 use crate::main_menu_plugin::MainMenuPlugin;
 use crate::render_fps_plugin::RenderFpsPlugin;
+use crate::test_cube_plugin::TestCubePlugin;
 
 fn main() {
     App::new()
@@ -44,6 +46,7 @@ fn main() {
             ConnectionErrorPlugin,
             ConnectedPlugin,
             CameraPlugin,
+            TestCubePlugin,
         ))
 
         .run();
