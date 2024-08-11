@@ -14,29 +14,32 @@ const LOCALHOST: &str = "127.0.0.1";
 
 impl Plugin for ServerNetworkPlugin {
     fn build(&self, app: &mut App) {
-        let server = RenetServer::new(ConnectionConfig::default());
-        app.insert_resource(server);
-        
-        let server_addr = format!("{LOCALHOST}:{DEFAULT_PORT}").parse().unwrap();
-        let socket = UdpSocket::bind(server_addr).unwrap();
-        let server_config = ServerConfig {
-            current_time: SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap(),
-            max_clients: 64,
-            protocol_id: 0,
-            public_addresses: vec![server_addr],
-            authentication: ServerAuthentication::Unsecure,
-        };
-        let transport = NetcodeServerTransport::new(server_config, socket).unwrap();
-
         app
             .add_plugins((
                 RenetServerPlugin,
                 NetcodeServerPlugin,
             ))
-            .insert_resource(transport)
+            .insert_resource(create_renet_server())
+            .insert_resource(create_transport())
             .add_systems(Update, handle_events)
         ;
     }
+}
+
+fn create_renet_server() -> RenetServer {
+    RenetServer::new(ConnectionConfig::default())
+}
+fn create_transport() -> NetcodeServerTransport {
+    let server_addr = format!("{LOCALHOST}:{DEFAULT_PORT}").parse().unwrap();
+    let socket = UdpSocket::bind(server_addr).unwrap();
+    let server_config = ServerConfig {
+        current_time: SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap(),
+        max_clients: 64,
+        protocol_id: 0,
+        public_addresses: vec![server_addr],
+        authentication: ServerAuthentication::Unsecure,
+    };
+    NetcodeServerTransport::new(server_config, socket).unwrap()
 }
 
 /// Обрабатывает события подключения / отключения клиентов.
