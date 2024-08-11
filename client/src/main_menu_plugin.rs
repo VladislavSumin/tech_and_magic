@@ -1,8 +1,5 @@
-use std::net::UdpSocket;
-use std::time::SystemTime;
 use bevy::prelude::*;
 use bevy_egui::EguiContexts;
-use bevy_renet::renet::transport::{ClientAuthentication, NetcodeClientTransport};
 use egui::Align2;
 use feature_network_client::ConnectEvent;
 use crate::game_state::GameState;
@@ -22,6 +19,7 @@ impl Plugin for MainMenuPlugin {
 fn render(
     mut contexts: EguiContexts,
     mut ev_connect: EventWriter<ConnectEvent>,
+    mut game_state: ResMut<NextState<GameState>>,
 ) {
     let mut host = String::new();
     host.push_str("localhost");
@@ -32,6 +30,9 @@ fn render(
             ui.label("Host");
             ui.text_edit_singleline(&mut host);
             if ui.button("Connect").clicked() {
+                // TODO не очень хорошо что мы должны тут и создать подключение
+                // и изменить игровое состояние. Получается нужно уведомить две системы.
+                game_state.set(GameState::ConnectingToServer);
                 ev_connect.send(ConnectEvent {
                     host: "127.0.0.1".into(),
                     port: 5000,
