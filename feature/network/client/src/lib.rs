@@ -26,7 +26,13 @@ impl Plugin for ClientNetworkPlugin {
             ))
             .add_event::<ConnectEvent>()
             // TODO подумать, нужно ли тут смотреть на конкретные состояния.
-            .add_systems(Update, (handle_connect_event, handle_transport_error))
+            .add_systems(
+                Update,
+                (
+                    handle_connect_event.run_if(not(resource_exists::<RenetClient>)),
+                    handle_transport_error.run_if(resource_exists::<RenetClient>),
+                ),
+            )
         ;
     }
 }
@@ -63,8 +69,11 @@ fn handle_transport_error(
     mut transport_error_events: EventReader<NetcodeTransportError>,
     mut commands: Commands,
 ) {
-    for error in transport_error_events.read() {
+    // Специально читаем только одно событие за тик, так как renet кидает их сразу два.
+    for error in transport_error_events.read().take(1) {
         warn!("Transport error: {}", error);
+        // TODO тут при удалении получаем логи от библиотеки renetcode с ошибками, но как их
+        // исправить я пока не знаю, объединение в одну команду не помогает.
         commands.remove_resource::<NetcodeClientTransport>();
         commands.remove_resource::<RenetClient>();
     }
