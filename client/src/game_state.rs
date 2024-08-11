@@ -19,4 +19,5 @@ pub enum GameState {
     MainMenu,
     ConnectingToServer,
     ConnectionError,
+    InGame,
 }
