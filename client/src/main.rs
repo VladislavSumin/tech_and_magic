@@ -4,6 +4,7 @@ mod camera_plugin;
 mod main_menu_plugin;
 mod game_state;
 mod connecting_plugin;
+mod connection_error_plugin;
 
 use bevy::diagnostic::FrameTimeDiagnosticsPlugin;
 use bevy::prelude::*;
@@ -12,6 +13,7 @@ use core_log::create_log_plugin;
 use feature_network_client::ClientNetworkPlugin;
 use crate::camera_plugin::CameraPlugin;
 use crate::connecting_plugin::ConnectingPlugin;
+use crate::connection_error_plugin::ConnectionErrorPlugin;
 use crate::game_state::GameStatePlugin;
 use crate::loading_plugin::LoadingPlugin;
 use crate::main_menu_plugin::MainMenuPlugin;
@@ -37,6 +39,7 @@ fn main() {
             GameStatePlugin,
             MainMenuPlugin,
             ConnectingPlugin,
+            ConnectionErrorPlugin,
             CameraPlugin,
         ))
 
