@@ -7,6 +7,7 @@ mod connecting_plugin;
 mod connection_error_plugin;
 mod connected_plugin;
 mod test_cube_plugin;
+mod key_binding_plugin;
 
 use bevy::diagnostic::FrameTimeDiagnosticsPlugin;
 use bevy::prelude::*;
@@ -18,6 +19,7 @@ use crate::connected_plugin::ConnectedPlugin;
 use crate::connecting_plugin::ConnectingPlugin;
 use crate::connection_error_plugin::ConnectionErrorPlugin;
 use crate::game_state::GameStatePlugin;
+use crate::key_binding_plugin::KeyBindingsPlugin;
 use crate::loading_plugin::LoadingPlugin;
 use crate::main_menu_plugin::MainMenuPlugin;
 use crate::render_fps_plugin::RenderFpsPlugin;
@@ -39,6 +41,7 @@ fn main() {
         .add_plugins((
             RenderFpsPlugin,
             LoadingPlugin,
+            KeyBindingsPlugin,
             ClientNetworkPlugin,
             GameStatePlugin,
             MainMenuPlugin,
