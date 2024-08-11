@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 use bevy_egui::EguiContexts;
 use egui::Align2;
-use crate::game_state::GameState;
+use feature_game_state::GameState;
 
 pub struct ConnectingPlugin;
 

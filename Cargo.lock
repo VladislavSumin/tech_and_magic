@@ -1432,6 +1432,7 @@ dependencies = [
  "bevy_renet",
  "core_log",
  "egui",
+ "feature_game_state",
  "feature_loading_state",
  "feature_network_client",
 ]
@@ -1922,6 +1923,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4f9bfee30e4dedf0ab8b422f03af778d9612b63f502710fc500a334ebe2de645"
 dependencies = [
  "simd-adler32",
+]
+
+[[package]]
+name = "feature_game_state"
+version = "0.1.0"
+dependencies = [
+ "bevy",
+ "feature_loading_state",
 ]
 
 [[package]]

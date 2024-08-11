@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 use bevy_renet::renet::RenetClient;
-use crate::game_state::GameState;
+use feature_game_state::GameState;
 
 /// Переводит состояние игры в [GameState::InGame] при успешном подключении к серверу.
 pub struct ConnectedPlugin;

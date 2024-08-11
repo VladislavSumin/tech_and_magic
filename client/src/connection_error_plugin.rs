@@ -2,7 +2,7 @@ use bevy::prelude::*;
 use bevy_egui::EguiContexts;
 use bevy_renet::renet::transport::NetcodeTransportError;
 use egui::Align2;
-use crate::game_state::GameState;
+use feature_game_state::GameState;
 
 /// Плагин:
 /// * отображает ошибку ошибки соединения.

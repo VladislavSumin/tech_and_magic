@@ -3,7 +3,7 @@ use bevy::input::mouse::MouseMotion;
 use bevy::math::vec3;
 use bevy::prelude::*;
 use bevy::window::{CursorGrabMode, PrimaryWindow};
-use crate::game_state::GameState;
+use feature_game_state::GameState;
 use crate::key_binding_plugin::KeyBindings;
 
 pub struct CameraPlugin;

@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use crate::game_state::GameState;
+use feature_game_state::GameState;
 
 /// Плагин создает тестовый куб.
 pub struct TestCubePlugin;

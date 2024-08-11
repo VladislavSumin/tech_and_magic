@@ -1,0 +1,9 @@
+[package]
+name = "feature_game_state"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+feature_loading_state = { path = "../loading_state" }
+
+bevy = { workspace = true }
