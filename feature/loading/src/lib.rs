@@ -8,9 +8,38 @@
 //! прогресса загрузки необходимо во время работы [Startup] системы зарегистрировать такие статусы используя
 //! [LoadingStatuses]. Как только все [LoadingStatus] будут в загружены приложение перейдет в состояние
 //! [LoadingState::Loaded].
+//! ```rust
+//! use bevy::prelude::*;
+//! use feature_loading::{LoadingStatus, LoadingStatuses};
 //!
+//! // Добавление
+//! fn add_loading_status_system(
+//!     mut loading_statuses: ResMut<LoadingStatuses>,
+//! ) {
+//!     loading_statuses.register("unique_id", LoadingStatus::default());
+//! }
+//!
+//! // Обновление
+//! fn update_loading_status_system(
+//!     mut loading_statuses: ResMut<LoadingStatuses>,
+//! ) {
+//!     let ls = loading_statuses.get_status_mut("unique_id");
+//!     ls.is_loaded = true;
+//! }
+//!
+//! ```
 //! ## Наблюдение за прогрессом загрузки.
 //! Что бы узнать текущий статус загрузки существует ресурс [LoadingProgress].
+//! ```rust
+//! use bevy::prelude::*;
+//! use feature_loading::LoadingProgress;
+//!
+//! fn watch_loading_progress(
+//!     progress: Res<LoadingProgress>,
+//! ) {
+//!     println!("Loading progress: {progress}");
+//! }
+//! ```
 
 use bevy::prelude::*;
 use bevy::utils::HashMap;
