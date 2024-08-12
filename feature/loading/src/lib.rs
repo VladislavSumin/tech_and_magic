@@ -3,14 +3,24 @@
 //! Отслеживает статус загрузки с помощью ресурса [LoadingStatuses], после завершения загрузки переводит состояние в
 //! [LoadingState::Loaded] и удаляет ресурс [LoadingStatuses].
 //!
-//! ## Добавление статусов загрузки
+//! ## Добавление статусов загрузки.
 //! Для добавления статуса загрузки (нужно для удержания приложения в состоянии [LoadingState::Loading] и отображения
 //! прогресса загрузки необходимо во время работы [Startup] системы зарегистрировать такие статусы используя
 //! [LoadingStatuses]. Как только все [LoadingStatus] будут в загружены приложение перейдет в состояние
 //! [LoadingState::Loaded].
 //! ```rust
 //! use bevy::prelude::*;
-//! use feature_loading::{LoadingStatus, LoadingStatuses};
+//! use feature_loading::*;
+//!
+//! fn main() {
+//!     App::new()
+//!         .add_systems(Startup, add_loading_status_system)
+//!         .add_systems(
+//!             Update, 
+//!             update_loading_status_system.run_if(in_state(LoadingState::Loading)),
+//!         )
+//!         .run();
+//! }
 //!
 //! // Добавление
 //! fn add_loading_status_system(
@@ -29,7 +39,8 @@
 //!
 //! ```
 //! ## Наблюдение за прогрессом загрузки.
-//! Что бы узнать текущий статус загрузки существует ресурс [LoadingProgress].
+//! Что бы узнать текущий статус загрузки существует ресурс [LoadingProgress]. **Внимание** данный ресурс доступен
+//! только в состоянии [LoadingState::Loading].
 //! ```rust
 //! use bevy::prelude::*;
 //! use feature_loading::LoadingProgress;
