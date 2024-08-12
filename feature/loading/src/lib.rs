@@ -16,7 +16,7 @@
 //!     App::new()
 //!         .add_systems(Startup, add_loading_status_system)
 //!         .add_systems(
-//!             Update, 
+//!             Update,
 //!             update_loading_status_system.run_if(in_state(LoadingState::Loading)),
 //!         )
 //!         .run();
