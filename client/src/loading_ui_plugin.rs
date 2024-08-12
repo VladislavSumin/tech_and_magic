@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use feature_loading::{LoadingProgress, LoadingState};
+use core_loading::{LoadingProgress, LoadingState};
 
 /// Отображает текущий прогресс загрузки.
 pub struct LoadingUiPlugin;

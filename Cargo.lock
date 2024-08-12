@@ -1430,10 +1430,10 @@ dependencies = [
  "bevy",
  "bevy_egui",
  "bevy_renet",
+ "core_loading",
  "core_log",
  "egui",
  "feature_game_state",
- "feature_loading",
  "feature_network_client",
 ]
 
@@ -1597,6 +1597,13 @@ dependencies = [
  "bitflags 1.3.2",
  "core-foundation",
  "libc",
+]
+
+[[package]]
+name = "core_loading"
+version = "0.1.0"
+dependencies = [
+ "bevy",
 ]
 
 [[package]]
@@ -1930,14 +1937,7 @@ name = "feature_game_state"
 version = "0.1.0"
 dependencies = [
  "bevy",
- "feature_loading",
-]
-
-[[package]]
-name = "feature_loading"
-version = "0.1.0"
-dependencies = [
- "bevy",
+ "core_loading",
 ]
 
 [[package]]

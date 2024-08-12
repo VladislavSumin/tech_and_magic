@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use feature_loading::{LoadingState, LoadingStatus, LoadingStatuses};
+use core_loading::{LoadingState, LoadingStatus, LoadingStatuses};
 
 /// Создает тестовую загрузку.
 pub struct TestLoadingPlugin;

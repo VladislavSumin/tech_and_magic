@@ -10,7 +10,7 @@
 //! [LoadingState::Loaded].
 //! ```rust
 //! use bevy::prelude::*;
-//! use feature_loading::*;
+//! use core_loading::*;
 //!
 //! fn main() {
 //!     App::new()
@@ -43,7 +43,7 @@
 //! только в состоянии [LoadingState::Loading].
 //! ```rust
 //! use bevy::prelude::*;
-//! use feature_loading::LoadingProgress;
+//! use core_loading::LoadingProgress;
 //!
 //! fn watch_loading_progress(
 //!     progress: Res<LoadingProgress>,

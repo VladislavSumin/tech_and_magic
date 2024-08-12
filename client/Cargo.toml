@@ -4,9 +4,9 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+core_loading = { path = "../core/loading" }
 core_log = { path = "../core/log" }
 feature_game_state = { path = "../feature/game_state" }
-feature_loading = { path = "../feature/loading" }
 feature_network_client = { path = "../feature/network/client" }
 
 bevy = { workspace = true }

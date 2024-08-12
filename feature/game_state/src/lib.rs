@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use feature_loading::LoadingState;
+use core_loading::LoadingState;
 
 /// Плагин отвечающий за создание [GameState].
 pub struct GameStatePlugin;
