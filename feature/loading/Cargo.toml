@@ -1,5 +1,5 @@
 [package]
-name = "feature_loading_state"
+name = "feature_loading"
 version = "0.1.0"
 edition = "2021"
 

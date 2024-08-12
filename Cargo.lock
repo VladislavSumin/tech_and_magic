@@ -1433,7 +1433,7 @@ dependencies = [
  "core_log",
  "egui",
  "feature_game_state",
- "feature_loading_state",
+ "feature_loading",
  "feature_network_client",
 ]
 
@@ -1930,11 +1930,11 @@ name = "feature_game_state"
 version = "0.1.0"
 dependencies = [
  "bevy",
- "feature_loading_state",
+ "feature_loading",
 ]
 
 [[package]]
-name = "feature_loading_state"
+name = "feature_loading"
 version = "0.1.0"
 dependencies = [
  "bevy",

@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use feature_loading_state::LoadingState;
+use feature_loading::LoadingState;
 
 /// Выводит фейковый прогресс загрузки в состоянии [LoadingState::Loading], через
 /// какое-то время переводит в состояние [LoadingState::Loaded] и убирает текст.

@@ -4,6 +4,6 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-feature_loading_state = { path = "../loading_state" }
+feature_loading = { path = "../loading" }
 
 bevy = { workspace = true }

@@ -6,7 +6,7 @@ edition = "2021"
 [dependencies]
 core_log = { path = "../core/log" }
 feature_game_state = { path = "../feature/game_state" }
-feature_loading_state = { path = "../feature/loading_state" }
+feature_loading = { path = "../feature/loading" }
 feature_network_client = { path = "../feature/network/client" }
 
 bevy = { workspace = true }
