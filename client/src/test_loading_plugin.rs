@@ -1,28 +1,24 @@
 use bevy::prelude::*;
 use core_loading::{LoadingState, LoadingStatus, LoadingStatuses};
+use core_loading::app_loading_registrar::AppLoadingRegistrar;
 
 /// Создает тестовую загрузку.
 pub struct TestLoadingPlugin;
+const TEST_LOADING_STATUS: &str = "test_loading_status";
 
 impl Plugin for TestLoadingPlugin {
     fn build(&self, app: &mut App) {
         app
-            .add_systems(Startup, register)
+            .register_loading_status(
+                TEST_LOADING_STATUS,
+                LoadingStatus {
+                    weight: 1.,
+                    ..default()
+                },
+            )
             .add_systems(Update, update.run_if(in_state(LoadingState::Loading)))
         ;
     }
-}
-
-const TEST_LOADING_STATUS: &str = "test_loading_status";
-
-fn register(
-    mut loading_statuses: ResMut<LoadingStatuses>,
-) {
-    let ls = LoadingStatus {
-        weight: 1.,
-        ..default()
-    };
-    loading_statuses.register(TEST_LOADING_STATUS, ls);
 }
 
 fn update(

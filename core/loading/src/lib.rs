@@ -8,6 +8,8 @@
 //! прогресса загрузки необходимо во время работы [Startup] системы зарегистрировать такие статусы используя
 //! [LoadingStatuses]. Как только все [LoadingStatus] будут в загружены приложение перейдет в состояние
 //! [LoadingState::Loaded].
+//! **Обратите внимание**, существует расширение [app_loading_registrar] позволяющее более просто
+//! регистрировать простые статусы.
 //! ```rust
 //! use bevy::prelude::*;
 //! use core_loading::*;
@@ -51,6 +53,8 @@
 //!     println!("Loading progress: {progress}");
 //! }
 //! ```
+
+pub mod app_loading_registrar;
 
 use bevy::prelude::*;
 use bevy::utils::HashMap;
