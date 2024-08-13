@@ -23,7 +23,8 @@ fn receive_player_position(
     for client_id in server.clients_id() {
         while let Some(data) = server.receive_message(client_id, *channel_id) {
             let data: ClientPlayerPosition = bincode::deserialize(&data).unwrap();
-            info!("data = {}", data.0);
+            // TODO
+            // info!("data = {}", data.0);
         }
     }
 }

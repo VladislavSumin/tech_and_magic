@@ -5,6 +5,9 @@ edition = "2021"
 
 [dependencies]
 core_players_shared = { path = "../shared" }
+core_network_client = { path = "../../../core/network/client" }
+
 
 bevy = { workspace = true }
 bevy_renet = { workspace = true }
+bincode = { workspace = true }

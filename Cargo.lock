@@ -1659,6 +1659,8 @@ version = "0.1.0"
 dependencies = [
  "bevy",
  "bevy_renet",
+ "bincode",
+ "core_network_client",
  "core_players_shared",
 ]
 
