@@ -29,6 +29,13 @@ impl Plugin for ServerNetworkPlugin {
 }
 
 fn create_renet_server() -> RenetServer {
+    // TODO
+    // Создаем конфиг
+    // let config = ConnectionConfig {
+    //     available_bytes_per_tick: 60_000,
+    //     client_channels_config: channel_registration.client_channels.clone(),
+    //     server_channels_config: channel_registration.server_channels.clone(),
+    // };
     RenetServer::new(ConnectionConfig::default())
 }
 fn create_transport() -> NetcodeServerTransport {

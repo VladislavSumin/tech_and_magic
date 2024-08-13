@@ -31,15 +31,15 @@ pub struct ChannelRegistrationInfo {
 /// через [ChannelRegistrar].
 #[derive(Resource)]
 pub struct ChannelMapping {
-    client_channels: HashMap<String, u8>,
-    server_channels: HashMap<String, u8>,
+    pub client_channels: HashMap<String, u8>,
+    pub server_channels: HashMap<String, u8>,
 }
 
 /// Внутренне представление каналов, используется при инициализации сетевого слоя.
 #[derive(Resource)]
-pub(crate) struct ChannelRegistration {
-    client_channels: Vec<ChannelConfig>,
-    server_channels: Vec<ChannelConfig>,
+pub struct ChannelRegistration {
+    pub client_channels: Vec<ChannelConfig>,
+    pub server_channels: Vec<ChannelConfig>,
 }
 
 impl Plugin for NetworkChannelRegistrationPlugin {

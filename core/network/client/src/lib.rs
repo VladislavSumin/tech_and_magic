@@ -5,7 +5,8 @@ use bevy_renet::renet::{ConnectionConfig, RenetClient};
 use bevy_renet::renet::transport::{ClientAuthentication, NetcodeClientTransport, NetcodeTransportError};
 use bevy_renet::RenetClientPlugin;
 use bevy_renet::transport::NetcodeClientPlugin;
-use core_network_shared::channel_registration::NetworkChannelRegistrationPlugin;
+use core_loading::LoadingState;
+use core_network_shared::channel_registration::{ChannelRegistration, NetworkChannelRegistrationPlugin};
 
 /// Отвечает за базовую работу сети на клиенте.
 /// Плагин слушает события [ConnectEvent] и устанавливает соединение при получении такого события.
@@ -33,7 +34,7 @@ impl Plugin for ClientNetworkPlugin {
                 (
                     handle_connect_event.run_if(not(resource_exists::<RenetClient>)),
                     handle_transport_error.run_if(resource_exists::<RenetClient>),
-                ),
+                ).run_if(in_state(LoadingState::Loaded)),
             )
         ;
     }
@@ -41,13 +42,22 @@ impl Plugin for ClientNetworkPlugin {
 
 /// Слушает события [ConnectEvent] и добавляет необходимые ресурсы при их получении.
 fn handle_connect_event(
+    channel_registration: Res<ChannelRegistration>,
     mut connect_events: EventReader<ConnectEvent>,
     mut commands: Commands,
 ) {
     for event in connect_events.read() {
         info!("Connecting to {}:{}", event.host, event.port);
+
+        // Создаем конфиг
+        let config = ConnectionConfig {
+            available_bytes_per_tick: 60_000,
+            client_channels_config: channel_registration.client_channels.clone(),
+            server_channels_config: channel_registration.server_channels.clone(),
+        };
+
         // Создаем сетевой клиент.
-        let client = RenetClient::new(ConnectionConfig::default());
+        let client = RenetClient::new(config);
         commands.insert_resource(client);
 
         // Создаем сетевой слой для клиента.
