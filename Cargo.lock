@@ -1653,6 +1653,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "core_players_client"
+version = "0.1.0"
+
+[[package]]
+name = "core_players_server"
+version = "0.1.0"
+
+[[package]]
+name = "core_players_shared"
+version = "0.1.0"
+
+[[package]]
 name = "coreaudio-rs"
 version = "0.11.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
