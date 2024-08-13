@@ -6,12 +6,14 @@ use bevy::prelude::*;
 use bevy::utils::HashMap;
 use bevy_renet::renet::{ClientId, ServerEvent};
 use core_loading::LoadingState;
+use core_players_shared::SharedPlayersPlugin;
 
 pub struct ServerPlayersPlugin;
 
 impl Plugin for ServerPlayersPlugin {
     fn build(&self, app: &mut App) {
         app
+            .add_plugins(SharedPlayersPlugin)
             .init_resource::<Players>()
             .add_systems(Update, handle_server_events.run_if(in_state(LoadingState::Loaded)))
         ;

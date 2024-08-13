@@ -1657,6 +1657,8 @@ name = "core_players_client"
 version = "0.1.0"
 dependencies = [
  "bevy",
+ "bevy_renet",
+ "core_players_shared",
 ]
 
 [[package]]
@@ -1666,11 +1668,18 @@ dependencies = [
  "bevy",
  "bevy_renet",
  "core_loading",
+ "core_players_shared",
 ]
 
 [[package]]
 name = "core_players_shared"
 version = "0.1.0"
+dependencies = [
+ "bevy",
+ "bevy_renet",
+ "core_network_shared",
+ "serde",
+]
 
 [[package]]
 name = "coreaudio-rs"
@@ -3543,6 +3552,7 @@ dependencies = [
  "log",
  "octets",
  "renetcode",
+ "serde",
 ]
 
 [[package]]

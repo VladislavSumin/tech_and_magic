@@ -4,3 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+core_network_shared = { path = "../../../core/network/shared" }
+
+bevy = { workspace = true }
+bevy_renet = { workspace = true }
+serde = { workspace = true }

@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 core_loading = { path = "../../loading" }
+core_players_shared = { path = "../shared" }
 
 bevy = { workspace = true }
 bevy_renet = { workspace = true }
