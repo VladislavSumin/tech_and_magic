@@ -4,5 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+core_loading = { path = "../../loading" }
+
 bevy = { workspace = true }
 bevy_renet = { workspace = true }

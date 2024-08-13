@@ -5,13 +5,15 @@
 use std::collections::{BTreeMap};
 use bevy::prelude::*;
 use bevy::utils::HashMap;
-use bevy_renet::renet::SendType;
+use bevy_renet::renet::{ChannelConfig, SendType};
+use core_loading::LoadingState;
 
 /// Регистрирует [ChannelRegistrar].
+/// Для своей работы требует [LoadingPlugin].
 pub struct NetworkChannelRegistrationPlugin;
 
 /// Общий ресурс через который происходит регистрация каналов, доступен только на этапе инициализации приложения.
-/// Для получения доступа к id каналов после инициализации следует воспользоваться ресурсом [ChannelRegistration].
+/// Для получения доступа к id каналов после инициализации следует воспользоваться ресурсом [ChannelMapping].
 #[derive(Resource, Default)]
 pub struct ChannelRegistrar {
     client_channels: BTreeMap<String, ChannelRegistrationInfo>,
@@ -26,19 +28,70 @@ pub struct ChannelRegistrationInfo {
 }
 
 /// Информация о каналах, доступна только после инициализации приложения. На этапе регистрации каналы следует добавлять
-/// через [ChannelRegistrar]
+/// через [ChannelRegistrar].
 #[derive(Resource)]
-pub struct ChannelRegistration {
+pub struct ChannelMapping {
     client_channels: HashMap<String, u8>,
     server_channels: HashMap<String, u8>,
+}
+
+/// Внутренне представление каналов, используется при инициализации сетевого слоя.
+#[derive(Resource)]
+pub(crate) struct ChannelRegistration {
+    client_channels: Vec<ChannelConfig>,
+    server_channels: Vec<ChannelConfig>,
 }
 
 impl Plugin for NetworkChannelRegistrationPlugin {
     fn build(&self, app: &mut App) {
         app
             .init_resource::<ChannelRegistrar>()
+            .add_systems(OnExit(LoadingState::Loading), create_channel_registration)
         ;
     }
+}
+
+/// Удаляет ресурс [ChannelRegistrar].
+/// Взамен создает два новых [ChannelMapping] и [ChannelRegistration].
+fn create_channel_registration(
+    channel_registrar: Res<ChannelRegistrar>,
+    mut commands: Commands,
+) {
+    let mut client_channels = vec![];
+    let mut client_channel_mapping = HashMap::new();
+    for (index, (name, info)) in
+        channel_registrar.client_channels.iter().enumerate() {
+        client_channels.push(ChannelConfig {
+            channel_id: index as u8,
+            send_type: info.send_type.clone(),
+            max_memory_usage_bytes: info.max_memory_usage_bytes,
+        });
+        client_channel_mapping.insert(name.clone(), index as u8);
+    }
+
+    let mut server_channels = vec![];
+    let mut server_channel_mapping = HashMap::new();
+    for (index, (name, info)) in
+        channel_registrar.server_channels.iter().enumerate() {
+        server_channels.push(ChannelConfig {
+            channel_id: index as u8,
+            send_type: info.send_type.clone(),
+            max_memory_usage_bytes: info.max_memory_usage_bytes,
+        });
+        server_channel_mapping.insert(name.clone(), index as u8);
+    }
+
+    commands.insert_resource(ChannelMapping {
+        client_channels: client_channel_mapping,
+        server_channels: server_channel_mapping,
+    });
+
+    commands.insert_resource(ChannelRegistration {
+        client_channels,
+        server_channels,
+    });
+
+    commands.remove_resource::<ChannelRegistrar>()
 }
 
 impl ChannelRegistrar {
