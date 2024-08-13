@@ -4,9 +4,9 @@ use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
 use bevy::prelude::*;
 use core_log::create_log_plugin;
 use core_network_server::ServerNetworkPlugin;
+use feature_sync_player_position_server::SyncPlayerPositionPlugin;
 
 fn main() {
-    
     App::new()
         .add_plugins(
             MinimalPlugins
@@ -19,6 +19,9 @@ fn main() {
             FrameTimeDiagnosticsPlugin,
             LogDiagnosticsPlugin::default()
         ))
-        .add_plugins(ServerNetworkPlugin)
+        .add_plugins((
+            ServerNetworkPlugin,
+            SyncPlayerPositionPlugin,
+        ))
         .run();
 }

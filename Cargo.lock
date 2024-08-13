@@ -1435,6 +1435,7 @@ dependencies = [
  "core_network_client",
  "egui",
  "feature_game_state",
+ "feature_sync_player_position_client",
 ]
 
 [[package]]
@@ -1964,6 +1965,26 @@ version = "0.1.0"
 dependencies = [
  "bevy",
  "core_loading",
+]
+
+[[package]]
+name = "feature_sync_player_position_client"
+version = "0.1.0"
+dependencies = [
+ "bevy",
+ "bevy_renet",
+ "core_network_client",
+ "feature_sync_player_position_shared",
+]
+
+[[package]]
+name = "feature_sync_player_position_server"
+version = "0.1.0"
+dependencies = [
+ "bevy",
+ "bevy_renet",
+ "core_network_server",
+ "feature_sync_player_position_shared",
 ]
 
 [[package]]
@@ -3635,6 +3656,7 @@ dependencies = [
  "bevy_renet",
  "core_log",
  "core_network_server",
+ "feature_sync_player_position_server",
 ]
 
 [[package]]

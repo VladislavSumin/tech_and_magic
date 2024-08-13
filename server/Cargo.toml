@@ -6,6 +6,8 @@ edition = "2021"
 [dependencies]
 core_log = { path = "../core/log" }
 core_network_server = { path = "../core/network/server" }
+feature_sync_player_position_server = { path = "../feature/sync_player_position/server" }
+
 
 bevy = { workspace = true }
 bevy_renet = { workspace = true }

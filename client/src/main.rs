@@ -16,6 +16,7 @@ use core_loading::LoadingPlugin;
 use core_log::create_log_plugin;
 use core_network_client::ClientNetworkPlugin;
 use feature_game_state::GameStatePlugin;
+use feature_sync_player_position_client::SyncPlayerPositionPlugin;
 use crate::camera_plugin::CameraPlugin;
 use crate::connected_plugin::ConnectedPlugin;
 use crate::connecting_plugin::ConnectingPlugin;
@@ -52,6 +53,7 @@ fn main() {
             ConnectionErrorPlugin,
             ConnectedPlugin,
             CameraPlugin,
+            SyncPlayerPositionPlugin,
             TestLoadingPlugin,
             TestCubePlugin,
         ))
