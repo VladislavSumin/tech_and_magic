@@ -64,9 +64,11 @@ fn handle_connect_event(
 
         // Создаем сетевой слой для клиента.
         let server_addr = format!("{}:{}", event.host, event.port).parse().unwrap();
+        let current_time = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap();
+        let client_id = current_time.as_millis() as u64;
         let authentication = ClientAuthentication::Unsecure {
             server_addr,
-            client_id: 0,
+            client_id,
             user_data: None,
             protocol_id: 0,
         };
