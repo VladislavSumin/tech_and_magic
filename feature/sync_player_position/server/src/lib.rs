@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use bevy_renet::renet::{RenetClient, RenetServer};
+use bevy_renet::renet::RenetServer;
 use core_loading::LoadingState;
 use core_network_server::ChannelMapping;
 use feature_sync_player_position_shared::{CLIENT_PLAYER_POSITION, ClientPlayerPosition, SyncPlayerPositionSharedPlugin};
