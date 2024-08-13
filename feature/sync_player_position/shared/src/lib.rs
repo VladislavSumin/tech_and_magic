@@ -1,10 +1,14 @@
 use bevy::prelude::*;
 use bevy_renet::renet::SendType;
+use serde::{Deserialize, Serialize};
 use core_network_shared::app_channel_registrar::AppChannelRegistrar;
 use core_network_shared::channel_registration::ChannelRegistrationInfo;
 
 pub struct SyncPlayerPositionSharedPlugin;
 pub const CLIENT_PLAYER_POSITION: &str = "client_player_position";
+
+#[derive(Serialize, Deserialize)]
+pub struct ClientPlayerPosition(pub Vec3);
 
 impl Plugin for SyncPlayerPositionSharedPlugin {
     fn build(&self, app: &mut App) {

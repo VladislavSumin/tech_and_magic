@@ -9,6 +9,8 @@ use core_loading::LoadingState;
 use core_network_shared::channel_registration::{ChannelRegistration, NetworkChannelRegistrationPlugin};
 use core_network_shared::DEFAULT_PORT;
 
+pub use core_network_shared::channel_registration::ChannelMapping;
+
 /// Отвечает за базовую настройку сети на сервере.
 pub struct ServerNetworkPlugin;
 

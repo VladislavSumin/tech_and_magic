@@ -4,8 +4,10 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+core_loading = { path = "../../../core/loading" }
 core_network_server = { path = "../../../core/network/server" }
 feature_sync_player_position_shared = { path = "../shared" }
 
 bevy = { workspace = true }
 bevy_renet = { workspace = true }
+bincode = { workspace = true }

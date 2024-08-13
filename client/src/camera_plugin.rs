@@ -4,6 +4,7 @@ use bevy::math::vec3;
 use bevy::prelude::*;
 use bevy::window::{CursorGrabMode, PrimaryWindow};
 use feature_game_state::GameState;
+use feature_sync_player_position_client::Player;
 use crate::key_binding_plugin::KeyBindings;
 
 pub struct CameraPlugin;
@@ -50,6 +51,7 @@ fn setup_player_camera(mut commands: Commands) {
                 .looking_at(vec3(14., 14., 0.), Vec3::Z),
             ..default()
         },
+        Player,
         PlayerCamera,
     ));
 }

@@ -8,6 +8,8 @@ use bevy_renet::transport::NetcodeClientPlugin;
 use core_loading::LoadingState;
 use core_network_shared::channel_registration::{ChannelRegistration, NetworkChannelRegistrationPlugin};
 
+pub use core_network_shared::channel_registration::ChannelMapping;
+
 /// Отвечает за базовую работу сети на клиенте.
 /// Плагин слушает события [ConnectEvent] и устанавливает соединение при получении такого события.
 pub struct ClientNetworkPlugin;

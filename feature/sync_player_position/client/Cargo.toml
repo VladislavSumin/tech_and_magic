@@ -6,6 +6,8 @@ edition = "2021"
 [dependencies]
 core_network_client = { path = "../../../core/network/client" }
 feature_sync_player_position_shared = { path = "../shared" }
+feature_game_state = { path = "../../game_state" }
 
 bevy = { workspace = true }
 bevy_renet = { workspace = true }
+bincode = { workspace = true }
