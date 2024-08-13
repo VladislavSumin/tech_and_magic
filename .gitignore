@@ -1,2 +1,4 @@
-/.idea/
+/.idea/*
+!/.idea/codeStyles/
+!/.idea/dictionaries/
 /target/
