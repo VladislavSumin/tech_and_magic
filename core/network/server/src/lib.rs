@@ -1,7 +1,7 @@
 use std::net::UdpSocket;
 use std::time::SystemTime;
 use bevy::prelude::*;
-use bevy_renet::renet::{ConnectionConfig, RenetServer, ServerEvent};
+use bevy_renet::renet::{ConnectionConfig, RenetServer};
 use bevy_renet::renet::transport::{NetcodeServerTransport, ServerAuthentication, ServerConfig};
 use bevy_renet::RenetServerPlugin;
 use bevy_renet::transport::NetcodeServerPlugin;
@@ -25,7 +25,6 @@ impl Plugin for ServerNetworkPlugin {
                 NetworkChannelRegistrationPlugin,
             ))
             .add_systems(OnEnter(LoadingState::Loaded), init_network_layer)
-            .add_systems(Update, handle_events.run_if(in_state(LoadingState::Loaded)))
         ;
     }
 }
@@ -58,18 +57,4 @@ fn create_transport() -> NetcodeServerTransport {
         authentication: ServerAuthentication::Unsecure,
     };
     NetcodeServerTransport::new(server_config, socket).unwrap()
-}
-
-/// Обрабатывает события подключения / отключения клиентов.
-fn handle_events(mut server_events: EventReader<ServerEvent>) {
-    for event in server_events.read() {
-        match event {
-            ServerEvent::ClientConnected { client_id } => {
-                info!("Client {client_id} connected");
-            }
-            ServerEvent::ClientDisconnected { client_id, reason } => {
-                info!("Client {client_id} disconnected: {reason}");
-            }
-        }
-    }
 }

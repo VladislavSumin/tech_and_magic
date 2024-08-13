@@ -1655,10 +1655,18 @@ dependencies = [
 [[package]]
 name = "core_players_client"
 version = "0.1.0"
+dependencies = [
+ "bevy",
+]
 
 [[package]]
 name = "core_players_server"
 version = "0.1.0"
+dependencies = [
+ "bevy",
+ "bevy_renet",
+ "core_loading",
+]
 
 [[package]]
 name = "core_players_shared"
@@ -3686,6 +3694,7 @@ dependencies = [
  "core_loading",
  "core_log",
  "core_network_server",
+ "core_players_server",
  "feature_sync_player_position_server",
 ]
 
