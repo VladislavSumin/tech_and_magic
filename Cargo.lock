@@ -1432,9 +1432,9 @@ dependencies = [
  "bevy_renet",
  "core_loading",
  "core_log",
+ "core_network_client",
  "egui",
  "feature_game_state",
- "feature_network_client",
 ]
 
 [[package]]
@@ -1611,6 +1611,32 @@ name = "core_log"
 version = "0.1.0"
 dependencies = [
  "bevy",
+]
+
+[[package]]
+name = "core_network_client"
+version = "0.1.0"
+dependencies = [
+ "bevy",
+ "bevy_renet",
+ "core_network_shared",
+]
+
+[[package]]
+name = "core_network_server"
+version = "0.1.0"
+dependencies = [
+ "bevy",
+ "bevy_renet",
+ "core_network_shared",
+]
+
+[[package]]
+name = "core_network_shared"
+version = "0.1.0"
+dependencies = [
+ "bevy",
+ "bevy_renet",
 ]
 
 [[package]]
@@ -1938,32 +1964,6 @@ version = "0.1.0"
 dependencies = [
  "bevy",
  "core_loading",
-]
-
-[[package]]
-name = "feature_network_client"
-version = "0.1.0"
-dependencies = [
- "bevy",
- "bevy_renet",
- "feature_network_shared",
-]
-
-[[package]]
-name = "feature_network_server"
-version = "0.1.0"
-dependencies = [
- "bevy",
- "bevy_renet",
- "feature_network_shared",
-]
-
-[[package]]
-name = "feature_network_shared"
-version = "0.1.0"
-dependencies = [
- "bevy",
- "bevy_renet",
 ]
 
 [[package]]
@@ -3625,7 +3625,7 @@ dependencies = [
  "bevy",
  "bevy_renet",
  "core_log",
- "feature_network_server",
+ "core_network_server",
 ]
 
 [[package]]

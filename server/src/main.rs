@@ -3,7 +3,7 @@ use bevy::app::ScheduleRunnerPlugin;
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
 use bevy::prelude::*;
 use core_log::create_log_plugin;
-use feature_network_server::ServerNetworkPlugin;
+use core_network_server::ServerNetworkPlugin;
 
 fn main() {
     

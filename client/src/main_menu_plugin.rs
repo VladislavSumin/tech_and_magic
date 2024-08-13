@@ -2,7 +2,7 @@ use bevy::prelude::*;
 use bevy_egui::EguiContexts;
 use egui::Align2;
 use feature_game_state::GameState;
-use feature_network_client::ConnectEvent;
+use core_network_client::ConnectEvent;
 
 /// Плагин отвечающий за работу главного игрового меню.
 pub struct MainMenuPlugin;

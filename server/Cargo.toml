@@ -5,8 +5,7 @@ edition = "2021"
 
 [dependencies]
 core_log = { path = "../core/log" }
-
-feature_network_server = { path = "../feature/network/server" }
+core_network_server = { path = "../core/network/server" }
 
 bevy = { workspace = true }
 bevy_renet = { workspace = true }

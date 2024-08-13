@@ -5,8 +5,8 @@ use bevy_renet::renet::{ConnectionConfig, RenetServer, ServerEvent};
 use bevy_renet::renet::transport::{NetcodeServerTransport, ServerAuthentication, ServerConfig};
 use bevy_renet::RenetServerPlugin;
 use bevy_renet::transport::NetcodeServerPlugin;
-use feature_network_shared::channel_registration::NetworkChannelRegistrationPlugin;
-use feature_network_shared::DEFAULT_PORT;
+use core_network_shared::channel_registration::NetworkChannelRegistrationPlugin;
+use core_network_shared::DEFAULT_PORT;
 
 /// Отвечает за базовую настройку сети на сервере.
 pub struct ServerNetworkPlugin;

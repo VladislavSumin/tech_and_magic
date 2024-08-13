@@ -3,10 +3,10 @@ resolver = "2"
 members = [
     "core/loading",
     "core/log",
+    "core/network/client",
+    "core/network/server",
+    "core/network/shared",
     "feature/game_state",
-    "feature/network/client",
-    "feature/network/server",
-    "feature/network/shared",
     "client",
     "server",
 ]

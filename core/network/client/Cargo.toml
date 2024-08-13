@@ -1,10 +1,10 @@
 [package]
-name = "feature_network_client"
+name = "core_network_client"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-feature_network_shared = { path = "../shared" }
+core_network_shared = { path = "../shared" }
 
 bevy = { workspace = true }
 bevy_renet = { workspace = true }

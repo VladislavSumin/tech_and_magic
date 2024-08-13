@@ -5,7 +5,7 @@ use bevy_renet::renet::{ConnectionConfig, RenetClient};
 use bevy_renet::renet::transport::{ClientAuthentication, NetcodeClientTransport, NetcodeTransportError};
 use bevy_renet::RenetClientPlugin;
 use bevy_renet::transport::NetcodeClientPlugin;
-use feature_network_shared::channel_registration::NetworkChannelRegistrationPlugin;
+use core_network_shared::channel_registration::NetworkChannelRegistrationPlugin;
 
 /// Отвечает за базовую работу сети на клиенте.
 /// Плагин слушает события [ConnectEvent] и устанавливает соединение при получении такого события.
