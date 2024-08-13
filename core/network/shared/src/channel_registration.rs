@@ -56,6 +56,6 @@ impl ChannelRegistrar {
 
     fn register<T: AsRef<str>>(channels: &mut BTreeMap<String, ChannelRegistrationInfo>, channel_name: T, channel: ChannelRegistrationInfo) {
         let is_new = channels.insert(channel_name.as_ref().to_owned(), channel).is_none();
-        assert!(!is_new, "Channel with name {} already registered", channel_name.as_ref())
+        assert!(is_new, "Channel with name {} already registered", channel_name.as_ref())
     }
 }
