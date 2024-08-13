@@ -1967,6 +1967,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "feature_sync_player_position_shared"
+version = "0.1.0"
+dependencies = [
+ "bevy",
+ "bevy_renet",
+ "core_network_shared",
+]
+
+[[package]]
 name = "fixedbitset"
 version = "0.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"

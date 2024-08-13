@@ -5,6 +5,7 @@
 use std::collections::{BTreeMap};
 use bevy::prelude::*;
 use bevy::utils::HashMap;
+use bevy_renet::renet::SendType;
 
 /// Регистрирует [ChannelRegistrar].
 pub struct NetworkChannelRegistrationPlugin;
@@ -19,7 +20,10 @@ pub struct ChannelRegistrar {
 
 /// Информация о конкретном канале.
 /// Смотреть [ChannelRegistrar].
-pub struct ChannelRegistrationInfo;
+pub struct ChannelRegistrationInfo {
+    pub send_type: SendType,
+    pub max_memory_usage_bytes: usize,
+}
 
 /// Информация о каналах, доступна только после инициализации приложения. На этапе регистрации каналы следует добавлять
 /// через [ChannelRegistrar]

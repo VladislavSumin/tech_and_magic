@@ -7,6 +7,7 @@ members = [
     "core/network/server",
     "core/network/shared",
     "feature/game_state",
+    "feature/sync_player_position/shared",
     "client",
     "server",
 ]
