@@ -5,7 +5,8 @@ use bevy_renet::renet::{ConnectionConfig, RenetServer, ServerEvent};
 use bevy_renet::renet::transport::{NetcodeServerTransport, ServerAuthentication, ServerConfig};
 use bevy_renet::RenetServerPlugin;
 use bevy_renet::transport::NetcodeServerPlugin;
-use core_network_shared::channel_registration::NetworkChannelRegistrationPlugin;
+use core_loading::LoadingState;
+use core_network_shared::channel_registration::{ChannelRegistration, NetworkChannelRegistrationPlugin};
 use core_network_shared::DEFAULT_PORT;
 
 /// Отвечает за базовую настройку сети на сервере.
@@ -21,22 +22,28 @@ impl Plugin for ServerNetworkPlugin {
                 NetcodeServerPlugin,
                 NetworkChannelRegistrationPlugin,
             ))
-            .insert_resource(create_renet_server())
-            .insert_resource(create_transport())
-            .add_systems(Update, handle_events)
+            .add_systems(OnEnter(LoadingState::Loaded), init_network_layer)
+            .add_systems(Update, handle_events.run_if(in_state(LoadingState::Loaded)))
         ;
     }
 }
 
-fn create_renet_server() -> RenetServer {
-    // TODO
+fn init_network_layer(
+    channel_registration: Res<ChannelRegistration>,
+    mut commands: Commands,
+) {
+    commands.insert_resource(create_renet_server(&channel_registration));
+    commands.insert_resource(create_transport());
+}
+
+fn create_renet_server(channel_registration: &ChannelRegistration) -> RenetServer {
     // Создаем конфиг
-    // let config = ConnectionConfig {
-    //     available_bytes_per_tick: 60_000,
-    //     client_channels_config: channel_registration.client_channels.clone(),
-    //     server_channels_config: channel_registration.server_channels.clone(),
-    // };
-    RenetServer::new(ConnectionConfig::default())
+    let config = ConnectionConfig {
+        available_bytes_per_tick: 60_000,
+        client_channels_config: channel_registration.client_channels.clone(),
+        server_channels_config: channel_registration.server_channels.clone(),
+    };
+    RenetServer::new(config)
 }
 fn create_transport() -> NetcodeServerTransport {
     let server_addr = format!("{LOCALHOST}:{DEFAULT_PORT}").parse().unwrap();
