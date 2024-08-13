@@ -15,6 +15,7 @@ use bevy_egui::EguiPlugin;
 use core_loading::LoadingPlugin;
 use core_log::create_log_plugin;
 use core_network_client::ClientNetworkPlugin;
+use core_players_client::ClientPlayersPlugin;
 use feature_game_state::GameStatePlugin;
 use feature_sync_player_position_client::SyncPlayerPositionPlugin;
 use crate::camera_plugin::CameraPlugin;
@@ -47,6 +48,7 @@ fn main() {
             LoadingUiPlugin,
             KeyBindingsPlugin,
             ClientNetworkPlugin,
+            ClientPlayersPlugin,
             GameStatePlugin,
             MainMenuPlugin,
             ConnectingPlugin,

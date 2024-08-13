@@ -1442,6 +1442,7 @@ dependencies = [
  "core_loading",
  "core_log",
  "core_network_client",
+ "core_players_client",
  "egui",
  "feature_game_state",
  "feature_sync_player_position_client",
@@ -1667,7 +1668,9 @@ version = "0.1.0"
 dependencies = [
  "bevy",
  "bevy_renet",
+ "bincode",
  "core_loading",
+ "core_network_server",
  "core_players_shared",
 ]
 

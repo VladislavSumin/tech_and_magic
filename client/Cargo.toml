@@ -6,6 +6,7 @@ edition = "2021"
 [dependencies]
 core_loading = { path = "../core/loading" }
 core_log = { path = "../core/log" }
+core_players_client = { path = "../core/players/client" }
 core_network_client = { path = "../core/network/client" }
 feature_game_state = { path = "../feature/game_state" }
 feature_sync_player_position_client = { path = "../feature/sync_player_position/client" }
