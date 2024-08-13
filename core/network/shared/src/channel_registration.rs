@@ -13,7 +13,8 @@ pub struct NetworkChannelRegistrationPlugin;
 /// Для получения доступа к id каналов после инициализации следует воспользоваться ресурсом [ChannelRegistration].
 #[derive(Resource, Default)]
 pub struct ChannelRegistrar {
-    channels: BTreeMap<String, ChannelRegistrationInfo>,
+    client_channels: BTreeMap<String, ChannelRegistrationInfo>,
+    server_channels: BTreeMap<String, ChannelRegistrationInfo>,
 }
 
 /// Информация о конкретном канале.
@@ -24,7 +25,8 @@ pub struct ChannelRegistrationInfo;
 /// через [ChannelRegistrar]
 #[derive(Resource)]
 pub struct ChannelRegistration {
-    channels: HashMap<String, u8>,
+    client_channels: HashMap<String, u8>,
+    server_channels: HashMap<String, u8>,
 }
 
 impl Plugin for NetworkChannelRegistrationPlugin {
@@ -36,10 +38,20 @@ impl Plugin for NetworkChannelRegistrationPlugin {
 }
 
 impl ChannelRegistrar {
-    /// Регистрирует новый канал.
+    /// Регистрирует новый канал client -> server.
     /// [channel_name] должен быть уникален.
-    fn register<T: AsRef<str>>(&mut self, channel_name: T, channel: ChannelRegistrationInfo) {
-        let is_new = self.channels.insert(channel_name.as_ref().to_owned(), channel).is_none();
+    pub fn register_client<T: AsRef<str>>(&mut self, channel_name: T, channel: ChannelRegistrationInfo) {
+        ChannelRegistrar::register(&mut self.client_channels, channel_name, channel)
+    }
+
+    /// Регистрирует новый канал server -> client.
+    /// [channel_name] должен быть уникален.
+    pub fn register_server<T: AsRef<str>>(&mut self, channel_name: T, channel: ChannelRegistrationInfo) {
+        ChannelRegistrar::register(&mut self.server_channels, channel_name, channel)
+    }
+
+    fn register<T: AsRef<str>>(channels: &mut BTreeMap<String, ChannelRegistrationInfo>, channel_name: T, channel: ChannelRegistrationInfo) {
+        let is_new = channels.insert(channel_name.as_ref().to_owned(), channel).is_none();
         assert!(!is_new, "Channel with name {} already registered", channel_name.as_ref())
     }
 }
