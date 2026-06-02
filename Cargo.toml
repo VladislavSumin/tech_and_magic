@@ -1,6 +1,3 @@
-[package]
-name = "tech_and_magic"
-version = "0.1.0"
-edition = "2024"
-
-[dependencies]
+[workspace]
+members = ["bin/client", "bin/server"]
+resolver = "3"
