@@ -1,3 +1,6 @@
+use bevy::{prelude::*};
+
 fn main() {
-    println!("Hello from client!");
+    App::new().add_plugins(DefaultPlugins).run();
 }
+
